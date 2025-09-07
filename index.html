@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Rentals - Equipment Rental Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c0c0c; /* Even darker background for a premium feel */
+            color: #f3f4f6;
+        }
+
+        /* --- Hero Section Styles --- */
+        #hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .hero-content .pre-heading { animation: slideInUp 1s ease-out 0.2s backwards; }
+        .hero-content .main-heading { animation: slideInUp 1s ease-out 0.4s backwards; }
+        .hero-content .cta-button { animation: slideInUp 1s ease-out 0.6s backwards; }
+        
+        .hero-controls {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 1rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            backdrop-filter: blur(5px);
+        }
+
+        .control-btn {
+            color: #d1d5db;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .control-btn.active {
+            color: white;
+            background-color: #00b36b; /* Accent color from logo */
+        }
+
+        /* --- Scroll Reveal Animation --- */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* --- Product Card Styles --- */
+        .service-card {
+             background-color: #1f2937;
+             transition: box-shadow 0.3s ease;
+             position: relative;
+             overflow: hidden;
+             height: 450px; /* Fixed height for uniform cards */
+        }
+        .service-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 179, 107, 0.2);
+        }
+        .service-card .card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.98) 60%, transparent); /* Made gradient stronger */
+            transform: translateY(100%);
+            transition: transform 0.4s ease-in-out;
+        }
+         .service-card .card-title-permanent {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            transition: opacity 0.4s ease;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8); /* Added text shadow for visibility */
+        }
+        .service-card:hover .card-content {
+            transform: translateY(0);
+        }
+         .service-card:hover .card-title-permanent {
+            opacity: 0;
+        }
+        
+        /* --- Feature Card Styles --- */
+        .feature-grid-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            transition: transform 0.4s ease;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .feature-grid-card:hover { transform: translateY(-5px); }
+        
+        .feature-grid-card-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+        }
+        .feature-grid-card-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4));
+            z-index: 1;
+        }
+        .feature-grid-card-content {
+            position: relative;
+            z-index: 2;
+        }
+       
+        .feature-grid-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .feature-grid-card p { color: #9ca3af; }
+
+        /* --- Keyframe Animations for Text --- */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-gray-900">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-10 bg-black bg-opacity-20 backdrop-blur-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">VISION RENTALS</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="about.html" class="text-gray-300 hover:text-white">About</a>
+                <a href="products.html" class="text-gray-300 hover:text-white">Products</a>
+                <a href="gallery.html" class="text-gray-300 hover:text-white">Gallery</a>
+                <a href="clients.html" class="text-gray-300 hover:text-white">Clients</a>
+                <a href="contact.html" class="text-gray-300 hover:text-white">Contact</a>
+                <a href="contact.html" class="bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700 transition duration-300 font-semibold" style="background-color: #00b36b;">Get a Quote</a>
+            </div>
+             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 bg-gray-900 bg-opacity-80 backdrop-blur-sm">
+             <a href="about.html" class="block text-gray-300 hover:text-white py-2">About</a>
+                <a href="products.html" class="block text-gray-300 hover:text-white py-2">Products</a>
+                <a href="gallery.html" class="block text-gray-300 hover:text-white py-2">Gallery</a>
+                <a href="clients.html" class="block text-gray-300 hover:text-white py-2">Clients</a>
+                <a href="contact.html" class="block text-gray-300 hover:text-white py-2">Contact</a>
+                <a href="contact.html" class="block bg-green-600 text-white px-4 py-2 mt-2 rounded-md text-center" style="background-color: #00b36b;">Get a Quote</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+             <video autoplay loop muted playsinline class="hero-video">
+                <source src="Assets/Main_Screen_Video-01.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay"></div>
+            <div id="hero-content-container" class="hero-content px-4"></div>
+            <div id="hero-controls-container" class="hero-controls"></div>
+        </section>
+
+        <!-- Premier Products Section -->
+        <section class="py-20 md:py-28 bg-black">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal-on-scroll">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4">Our Products</h2>
+                    <p class="text-lg text-gray-400 max-w-3xl mx-auto">
+                        Access the equipment you need through Vision Rentals. Committed to superior quality and results for all working heights.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+                    <!-- Product 1 -->
+                    <div class="reveal-on-scroll service-card rounded-lg text-left">
+                         <img src="Assets/images/01.jpg" alt="Boom Lift" class="w-full h-full object-cover">
+                         <h3 class="card-title-permanent text-2xl font-bold text-white">Boom Lift</h3>
+                         <div class="card-content">
+                            <h3 class="text-2xl font-bold text-white mb-3">Boom Lift</h3>
+                            <p class="text-gray-400 mb-4">A practical mechanical device that uses hydraulic power to provide a safe and efficient platform for people to work at elevated heights.</p>
+                            <a href="contact.html" class="font-semibold" style="color: #00b36b;">Get a Quote &rarr;</a>
+                         </div>
+                    </div>
+                    <!-- Product 2 -->
+                     <div class="reveal-on-scroll service-card rounded-lg text-left" style="transition-delay: 0.2s;">
+                         <img src="Assets/images/02.jpg" alt="Scissor Lift" class="w-full h-full object-cover">
+                          <h3 class="card-title-permanent text-2xl font-bold text-white">Scissor Lift</h3>
+                         <div class="card-content">
+                             <h3 class="text-2xl font-bold text-white mb-3">Scissor Lift</h3>
+                             <p class="text-gray-400 mb-4">Allows controlled vertical movement through linked, folding supports, offering a secure and efficient solution for elevated work needs.</p>
+                             <a href="contact.html" class="font-semibold" style="color: #00b36b;">Get a Quote &rarr;</a>
+                         </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="reveal-on-scroll service-card rounded-lg text-left" style="transition-delay: 0.4s;">
+                         <img src="Assets/images/03.jpg" alt="Spider Lift" class="w-full h-full object-cover">
+                         <h3 class="card-title-permanent text-2xl font-bold text-white">Spider Lift</h3>
+                         <div class="card-content">
+                            <h3 class="text-2xl font-bold text-white mb-3">Spider Lift</h3>
+                            <p class="text-gray-400 mb-4">A reliable option for reaching difficult spots. These compact lifts come with special legs for stable positioning on different surfaces.</p>
+                            <a href="contact.html" class="font-semibold" style="color: #00b36b;">Get a Quote &rarr;</a>
+                         </div>
+                    </div>
+                    <!-- Product 4 -->
+                     <div class="reveal-on-scroll service-card rounded-lg text-left" style="transition-delay: 0.6s;">
+                         <img src="Assets/images/04.jpg" alt="Scaffolding" class="w-full h-full object-cover">
+                         <h3 class="card-title-permanent text-2xl font-bold text-white">Scaffolding</h3>
+                         <div class="card-content">
+                            <h3 class="text-2xl font-bold text-white mb-3">Scaffolding</h3>
+                            <p class="text-gray-400 mb-4">A temporary and simple mechanical structured stage formed by metal pipes with wooden planks to set a stage at a particular height.</p>
+                            <a href="contact.html" class="font-semibold" style="color: #00b36b;">Get a Quote &rarr;</a>
+                         </div>
+                    </div>
+                </div>
+                
+                <!-- View All Products Button -->
+                <div class="mt-20 reveal-on-scroll">
+                    <a href="products.html" class="inline-block text-white font-semibold px-10 py-4 rounded-md transition duration-300 border-2 hover:bg-green-600 hover:border-green-600" style="border-color: #00b36b;">
+                        View All Products
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- "Who We Are" Section -->
+        <section class="py-20 md:py-28 bg-gray-900">
+             <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="reveal-on-scroll">
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Who We Are</h2>
+                        <p class="text-lg text-gray-400 mb-6">
+                            NEW VISION GLOBAL INDUSTRIES PVT LTD encompasses diverse businesses, from ITES/BPO services to Wind & Solar energy. Our latest venture, "VISION RENTALS," specializes in Scaffolding & MEWP rentals, catering to South India. Our team is dedicated to delivering exceptional rental services, ensuring utmost customer satisfaction.
+                        </p>
+                        <a href="about.html" class="font-semibold text-lg hover:text-green-300" style="color: #00b36b;">Learn More About Us &rarr;</a>
+                    </div>
+                     <div class="reveal-on-scroll" style="transition-delay: 0.2s;">
+                        <img src="https://placehold.co/600x400/1f2937/00b36b?text=Vision+Rentals+Team" alt="Our Team" class="rounded-lg shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Feature Grid Section with Video -->
+        <section class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="reveal-on-scroll text-center mb-12">
+                     <h2 class="text-4xl md:text-5xl font-extrabold text-white">A Smarter Way To Build</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="reveal-on-scroll feature-grid-card">
+                        <video autoplay loop muted playsinline class="feature-grid-card-video"><source src="Assets/001_video.mp4" type="video/mp4"></video>
+                        <div class="feature-grid-card-overlay"></div>
+                        <div class="feature-grid-card-content">
+                            <h3 style="color: #00b36b;">Operational Excellence</h3>
+                            <p>Empowering our proficient team of operators and technicians to maintain and run our machinery with precision, ensuring top-notch equipment performance for your projects.</p>
+                        </div>
+                    </div>
+                     <div class="reveal-on-scroll feature-grid-card" style="transition-delay: 0.1s;">
+                        <video autoplay loop muted playsinline class="feature-grid-card-video"><source src="Assets/002_video.mov" type="video/mp4"></video>
+                        <div class="feature-grid-card-overlay"></div>
+                        <div class="feature-grid-card-content">
+                            <h3 style="color: #00b36b;">Customer-Centric Solutions</h3>
+                            <p>Studying and understanding your unique requirements, we offer tailored solutions that perfectly fit your needs, making your projects a resounding success.</p>
+                        </div>
+                    </div>
+                     <div class="reveal-on-scroll feature-grid-card" style="transition-delay: 0.2s;">
+                        <video autoplay loop muted playsinline class="feature-grid-card-video"><source src="Assets/003_video.mov" type="video/mp4"></video>
+                        <div class="feature-grid-card-overlay"></div>
+                        <div class="feature-grid-card-content">
+                            <h3 style="color: #00b36b;">Reliable Quality Assurance</h3>
+                             <p>Upholding the highest standards of quality, we guarantee the finest equipment and service, providing you with trustworthy and efficient boom and scissor lift rentals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800 py-12">
+        <div class="container mx-auto px-6 text-left grid md:grid-cols-4 gap-8">
+            <div class="col-span-1">
+                <h3 class="text-xl font-bold text-white mb-4">VISION RENTALS</h3>
+                <p class="text-gray-400">We are the first in the rental services of MEWP at Coimbatore. We have a good number of branded machines to serve customer’s need across South India.</p>
+            </div>
+            <div>
+                 <h3 class="text-lg font-semibold text-white mb-4">QuickLinks</h3>
+                 <ul class="space-y-2">
+                     <li><a href="/" class="text-gray-400 hover:text-white">Home</a></li>
+                     <li><a href="/About" class="text-gray-400 hover:text-white">About Us</a></li>
+                     <li><a href="/Products" class="text-gray-400 hover:text-white">Our Products</a></li>
+                     <li><a href="/Clients" class="text-gray-400 hover:text-white">Our Clients</a></li>
+                     <li><a href="/contact" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                 </ul>
+            </div>
+             <div>
+                 <h3 class="text-lg font-semibold text-white mb-4">Products</h3>
+                 <ul class="space-y-2">
+                     <li><a href="/Boom-Lift" class="text-gray-400 hover:text-white">Boom Lift</a></li>
+                     <li><a href="/Scissor-Lift" class="text-gray-400 hover:text-white">Scissor Lift</a></li>
+                     <li><a href="/Spider-Lift" class="text-gray-400 hover:text-white">Spider Lift</a></li>
+                     <li><a href="/Scaffolding" class="text-gray-400 hover:text-white">Scaffolding</a></li>
+                 </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3>
+                <ul class="space-y-2 text-gray-400">
+                    <li>+91 95008 48649</li>
+                    <li>info@visionglobalrentals.com</li>
+                    <li>No.12 B.R.Nagar, Trichy Main Road, Coimbatore - 641 005</li>
+                </ul>
+            </div>
+        </div>
+         <div class="container mx-auto px-6 text-center text-gray-500 mt-8 pt-8 border-t border-gray-800">
+            <p>&copy; 2025 Vision Rentals. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Configuration for Hero Slider ---
+            const slides = [
+                {
+                    preHeading: 'Vision Rentals',
+                    mainHeading: 'PRODUCTS FOR ALL WORKING HEIGHTS',
+                    buttonText: 'Explore Products',
+                    controlText: 'Products',
+                },
+                {
+                    preHeading: 'Committed to Quality',
+                    mainHeading: 'SUPERIOR QUALITY AND RESULTS',
+                    buttonText: 'Why Choose Us',
+                    controlText: 'Quality',
+                },
+                {
+                    preHeading: 'Access The Equipment You Need',
+                    mainHeading: 'YOUR TRUSTED RENTAL PARTNER',
+                    buttonText: 'Get a Quote',
+                    controlText: 'Contact',
+                }
+            ];
+
+            let currentSlideIndex = 0;
+            let slideInterval;
+
+            const contentContainer = document.getElementById('hero-content-container');
+            const controlsContainer = document.getElementById('hero-controls-container');
+
+            function initializeSlider() {
+                slides.forEach((slide, index) => {
+                    const controlBtn = document.createElement('button');
+                    controlBtn.className = 'control-btn';
+                    controlBtn.id = `control-${index}`;
+                    controlBtn.textContent = slide.controlText;
+                    controlBtn.addEventListener('click', () => {
+                        changeSlideContent(index);
+                        resetInterval();
+                    });
+                    controlsContainer.appendChild(controlBtn);
+                });
+            }
+
+            function changeSlideContent(index) {
+                currentSlideIndex = index;
+                const slideData = slides[index];
+                contentContainer.innerHTML = `
+                    <p class="pre-heading text-gray-300 text-lg md:text-xl mb-2 font-semibold tracking-wider uppercase">${slideData.preHeading}</p>
+                    <h1 class="main-heading text-4xl md:text-7xl font-black uppercase tracking-tight">${slideData.mainHeading}</h1>
+                    <a href="contact.html" class="cta-button inline-block mt-8 text-white px-8 py-3 rounded-md transition duration-300 font-bold text-lg" style="background-color: #00b36b;">${slideData.buttonText}</a>
+                `;
+                 document.querySelectorAll('.control-btn').forEach((b, i) => {
+                    b.classList.toggle('active', i === index);
+                });
+            }
+
+            function nextSlide() {
+                const newIndex = (currentSlideIndex + 1) % slides.length;
+                changeSlideContent(newIndex);
+            }
+
+            function startInterval() {
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+
+            function resetInterval() {
+                clearInterval(slideInterval);
+                startInterval();
+            }
+
+            initializeSlider();
+            changeSlideContent(0);
+            startInterval();
+
+            // --- Scroll Reveal Logic ---
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            revealElements.forEach(el => { observer.observe(el); });
+
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
+
+
