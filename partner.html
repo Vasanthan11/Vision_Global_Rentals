@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner With Us</title>
+    <!-- Font Awesome for icons -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+     <style>
+        /* --- Color Palette & Basic Setup --- */
+        :root {
+            --white: #FFFFFF;
+            --black: #000000;
+            --dark-grey: #2a2a2a;
+            --light-grey-text: #a9a9a9;
+            --burgundy: #bb190e;
+            --brand-orange: #bb190e;
+            --section-bg-light: #f7fafc;
+            --section-bg-dark: #1a1a1a;
+            --border-color: #444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Partner Page --- */
+        .partner-page {
+            position: relative; /* Needed for the background pseudo-element */
+            padding: 80px 0;
+            overflow: hidden; /* Recommended for full-page pseudo-elements */
+        }
+        
+        /* New background image style */
+        .partner-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* IMPORTANT: Replace this with your desired background image */
+            background-image: url('./assets/images/partner_page_01.jpeg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2; /* Adjust opacity as needed */
+            z-index: -1; /* Places the image behind the content */
+        }
+
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Left Column: Info */
+        .title {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--light-grey-text);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .benefits-list i {
+            color: var(--brand-orange);
+        }
+
+        /* Right Column: Form */
+        .partner-form-wrapper {
+            background-color: var(--section-bg-dark);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--light-grey-text);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--dark-grey);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--white);
+            font-size: 16px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--brand-orange);
+            box-shadow: 0 0 0 3px rgba(243, 111, 45, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--burgundy);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #660B05; /* Darker burgundy */
+        }
+
+        .success-message {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--brand-orange);
+            font-weight: bold;
+        }
+
+        /* --- NEW: Why Partner Section --- */
+        .why-partner-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--light-grey-text);
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--section-bg-dark);
+            padding: 40px 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            color: var(--brand-orange);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--light-grey-text);
+            line-height: 1.6;
+        }
+
+        /* --- NEW: FAQ Section --- */
+        .faq-section {
+            padding: 80px 0;
+            background-color: var(--section-bg-dark);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .faq-card {
+            background-color: var(--dark-grey);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .faq-card h3 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .faq-card p {
+            color: var(--light-grey-text);
+            line-height: 1.7;
+        }
+
+        .faq-card p + p {
+            margin-top: 15px; /* Adds space between paragraphs */
+        }
+
+        /* --- Responsive Styles --- */
+        @media (min-width: 768px) {
+            .features-grid, .faq-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .partner-grid {
+                grid-template-columns: 1fr 1fr; /* Two columns on desktop */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+             <!-- Logo and Mobile Toggle on the left -->
+            <div class="nav-left">
+                <a href="#" class="nav-logo">
+                    <!-- I've put the logo source back in for you -->
+                    <img src="https://cdn.prod.website-files.com/60cb2013a506c737cfeddf74/615b4572ac1976917ff878a2_ES-Logo-Horizontal-Digital.svg" alt="Equipment Logo">
+                </a>
+                 <!-- Mobile Menu Toggle -->
+                <div class="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+
+            <!-- Main Navigation Menu (Desktop) - Updated Links -->
+            <div class="nav-center">
+                 <ul class="nav-menu">
+                    <li class="nav-item has-dropdown"><a href="#">RENT</a>
+                        <div class="dropdown-menu">
+                           <a href="#">ALL EQUIPMENTS</a>
+                           <p class="dropdown-subheading">POPULAR RENTALS</p>
+                           <div class="dropdown-item has-dropdown">
+                                <a href="#">EARTHMOVING <i class="fa-solid fa-chevron-right"></i></a>
+                                <div class="dropdown-menu sub-menu">
+                                    <a href="#">Ride-on Mini Skid Steer</a>
+                                    <a href="#">Mini Excavator 2,500 - 4,000 lbs</a>
+                                    <a href="#">ALL EARTHMOVING</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item has-dropdown"><a href="#">BUY</a>
+                        <div class="dropdown-menu"><a href="#">BUY USED</a></div>
+                    </li>
+                    <li class="nav-item"><a href="#">SELL</a></li>
+                    <li class="nav-item"><a href="./partner.html" target="_blank">PARTNER WITH US</a></li>
+                    <li class="nav-item"><a href="#">TECH</a></li>
+                </ul>
+            </div>
+
+            <!-- Right-side controls (Desktop) -->
+            <div class="nav-right">
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <a href="tel:1.888.80.RENTS" class="phone-number">1.888.80.RENTS</a>
+                <a href="#" class="nav-icon user-icon"><i class="fa-regular fa-user"></i></a>
+                <a href="#" class="nav-icon cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </nav>
+        
+        <!-- Mobile Navigation Menu - Updated Links -->
+        <div class="mobile-nav-menu">
+             <ul class="mobile-nav-links">
+                <li><a href="#">RENT</a></li>
+                <li><a href="#">BUY</a></li>
+                <li><a href="#">SELL</a></li>
+                <li><a href="#">PARTNER WITH US</a></li>
+                <li><a href="#">TECH</a></li>
+                <li class="mobile-nav-divider"></li>
+                <li><a href="#">Sign In</a></li>
+                <li><a href="tel:1.888.80.RENTS">1.888.80.RENTS</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="partner-page">
+        <div class="container">
+            <div class="partner-grid">
+                <!-- Left Column: Information -->
+                <div class="partner-info">
+                    <h1 class="title">Join Our Partner Network Today</h1>
+                    <p class="subtitle">Grow your business by partnering with a leader in the equipment rental industry. We provide the tools and support you need to succeed.</p>
+                    <ul class="benefits-list">
+                        <li><i class="fa-solid fa-check"></i> Access to a wider customer base.</li>
+                        <li><i class="fa-solid fa-check"></i> Leverage our advanced T3 technology.</li>
+                        <li><i class="fa-solid fa-check"></i> Collaborative marketing and support.</li>
+                        <li><i class="fa-solid fa-check"></i> Increase your fleet's utilization.</li>
+                    </ul>
+                </div>
+
+                <!-- Right Column: Form -->
+                <div class="partner-form-wrapper">
+                    <form id="partner-form">
+                        <h3 class="form-title">Ready to get more clients?</h3>
+                        <div class="form-group">
+                            <label for="fullName">Full Name*</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName">Company Name*</label>
+                            <input type="text" id="companyName" name="companyName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email*</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number*</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Enquiry</label>
+                            <textarea id="message" name="message" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Request</button>
+                        <p id="success-message" class="success-message"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- New Why Partner Section -->
+    <section class="why-partner-section">
+        <div class="container">
+            <h2 class="section-title">Do your rental machines spend more time idle than in use?</h2>
+            <p class="section-subtitle">We help you rent or sell them so you can get the most out of them.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-bolt-lightning feature-icon"></i>
+                    <h3 class="feature-title">Fast Transactions</h3>
+                    <p>Rent out your machines swiftly with our efficient and reliable process.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-tags feature-icon"></i>
+                    <h3 class="feature-title">Transparent Pricing</h3>
+                    <p>Enjoy clear and straightforward pricing with no hidden fees.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-clock-rotate-left feature-icon"></i>
+                    <h3 class="feature-title">Flexible Terms</h3>
+                    <p>Choose rental terms that suit your needs without long-term commitments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-grid">
+                <div class="faq-card">
+                    <h3>How does it work?</h3>
+                    <p>Contact us to let us know if you want to rent or sell your machinery. We will call you to arrange a meeting to discuss details, resolve any doubts, and clarify important points. If you agree, we will add you as a supplier in our network.</p>
+                </div>
+                <div class="faq-card">
+                    <h3>What do you gain?</h3>
+                    <p><strong>Clients:</strong> We will contact you when there are interested tenants or buyers, so you don't have to search for them.</p>
+                    <p><strong>Control:</strong> You decide the price, quantity, and type of machines to rent or sell.</p>
+                    <p><strong>Data:</strong> Our machine software provides valuable real-time information about the status of your equipment.</p>
+                </div>
+                <div class="faq-card">
+                    <h3>What do we gain?</h3>
+                    <p>We receive a percentage of the profit from each rental or sale, but you do not pay this directly. We aim to bring solutions to the industrial sector across the nation. We are expanding our presence and with your support, we will continue to grow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+     <footer class="site-footer">
+        <!-- Top Call-to-Action Section -->
+        <div class="cta-section">
+            <div class="container">
+                <div class="cta-grid">
+                    <!-- Partner With Us Card -->
+                    <div class="cta-card">
+                        <div class="cta-icon"><i class="fa-solid fa-handshake"></i></div>
+                        <div>
+                            <h3 class="cta-title">Partner With Us</h3>
+                            <p class="cta-description">Explain your needs and become a valued partner to expand your business.</p>
+                            <a href="#" class="cta-button">BECOME A PARTNER</a>
+                        </div>
+                    </div>
+
+                    <!-- Call for Enquiry Card -->
+                    <div class="cta-card">
+                        <div class="cta-icon"><i class="fa-solid fa-phone-volume"></i></div>
+                        <div>
+                            <h3 class="cta-title">Call For Enquiry</h3>
+                            <p class="cta-description">Have a question? Our experts are here to provide answers and solutions.</p>
+                            <a href="tel:18888073687" class="cta-button">CALL NOW</a>
+                        </div>
+                    </div>
+
+                    <!-- Expert Support Card -->
+                    <div class="cta-card">
+                        <div class="cta-icon"><i class="fa-solid fa-headset"></i></div>
+                        <div>
+                            <h3 class="cta-title">Can We Help?</h3>
+                            <p class="cta-description">Chat with our friendly support team for immediate assistance.</p>
+                            <a href="#" class="cta-button">CHAT NOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Section -->
+        <div class="main-footer">
+            <div class="container">
+                <div class="footer-links-grid">
+                    <div class="footer-column">
+                        <h4>MY ACCOUNT</h4>
+                        <a href="#">Rental Login</a>
+                        <a href="#">T3 Login</a>
+                        <a href="#">Credit Application</a>
+                        <a href="#">1-888-80-RENTS</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>RENT</h4>
+                        <a href="#">All Equipment</a>
+                        <a href="#">National Accounts</a>
+                        <a href="#">Rental Protection</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>BUY</h4>
+                        <a href="#">Buy New</a>
+                        <a href="#">Buy Used</a>
+                        <a href="#">Parts & Tools</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>PARTNER WITH US</h4>
+                        <a href="#">Become a Partner</a>
+                        <a href="#">Sell Your Equipment</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>TECH</h4>
+                        <a href="#">T3 Technology</a>
+                        <a href="#">Help Center</a>
+                        <a href="#">Release Updates</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>COMPANY</h4>
+                        <a href="#">Our Story</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press Room</a>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p class="copyright">&copy;2025 EquipShare</p>
+                    <div class="footer-legal-links">
+                        <a href="#">TERMS</a>
+                        <a href="#">PRIVACY</a>
+                        <a href="#">COOKIE SETTINGS</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("partner-form");
+            const successMessage = document.getElementById("success-message");
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // --- Configuration ---
+                const recipientEmail = "partner@yourequipmentsite.com"; // **IMPORTANT: Change this to your email**
+                const emailSubject = "New Partner Enquiry";
+
+                // --- Gather Form Data ---
+                const formData = new FormData(form);
+                let emailBody = "A new partner request has been submitted with the following details:\n\n";
+                
+                for (const [key, value] of formData.entries()) {
+                    // Capitalize the first letter of the key for readability
+                    const formattedKey = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1').trim();
+                    emailBody += `${formattedKey}: ${value}\n`;
+                }
+                
+                // --- Construct and Open Mailto Link ---
+                const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                
+                window.location.href = mailtoLink;
+
+                // --- Show Success Message ---
+                successMessage.textContent = "Thank you! Please complete sending the email in your mail client.";
+                
+                // Optional: Reset the form after a delay
+                setTimeout(() => {
+                    form.reset();
+                    successMessage.textContent = "";
+                }, 5000); 
+            });
+        });
+    </script>
+    <script src="./script.js"></script>
+</body>
+</html>
